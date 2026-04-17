@@ -1,15 +1,11 @@
 import tensorflow as tf
-import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import Dense, Conv2D,MaxPool2D,Flatten
 from Augmentation import augmented_train_ds, val_ds
 #from tensorflow.keras import layers, models
 #from tensorflow.keras.applications import MobileNetV2
 
-sns.set_theme()
 
 model = Sequential()
 
@@ -28,7 +24,7 @@ model.add(Flatten())
 
 model.add(Dense(units=128, activation='relu', dtype='float32'))
 
-model.add(Dense(units=4, activation='softmax', dtype='float32'))
+model.add(Dense(units=5, activation='softmax', dtype='float32'))
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
@@ -36,4 +32,4 @@ model.summary()
 
 trainingHistory = model.fit(augmented_train_ds, validation_data=val_ds, epochs=40)
 
-#model.save('a.h5')
+model.save('a.h5')
